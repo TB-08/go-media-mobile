@@ -1,27 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@900&amp;family=Montserrat:wght@600&amp;display=swap');
+      .heavy { font-family: 'Epilogue', sans-serif; font-weight: 900; }
+      .subtext { font-family: 'Montserrat', sans-serif; font-weight: 600; }
+    </style>
+  </defs>
+  
   <!-- Geometric Symbol -->
-  <g transform="translate(0, 0)">
+  <g transform="translate(10, 10)">
     <!-- Top Left: Peach Quadrant -->
     <path d="M 170 0 A 170 170 0 0 0 0 170 L 170 170 Z" fill="#FFCBA4"/>
-    <!-- Top Right: Orange Triangle -->
+    
+    <!-- Top Right: Orange Triangles (Precise) -->
     <path d="M 190 0 L 360 0 L 360 170 Z" fill="#FF5E00"/>
-    <path d="M 190 70 L 190 170 L 250 170 Z" fill="#FF5E00"/> <!-- Small triangle adjustment -->
+    <path d="M 190 85 L 190 170 L 255 170 Z" fill="#FF5E00"/>
     
     <!-- Bottom Left: Purple Square with Triangle Cutout -->
     <rect x="0" y="190" width="170" height="170" fill="#6025E1"/>
-    <path d="M 28 280 L 85 337 L 28 337 Z" fill="#FFFFFF"/>
+    <path d="M 0 360 L 85 360 L 0 275 Z" fill="#FFFFFF"/>
     
     <!-- Bottom Right: Navy Quadrant -->
     <path d="M 190 190 L 360 190 A 170 170 0 0 1 190 360 Z" fill="#0C2A72"/>
   </g>
 
   <!-- Text Section -->
-  <g transform="translate(420, 110)">
+  <g transform="translate(420, 125)">
     <!-- GO -->
-    <text x="0" y="0" font-family="Epilogue, Montserrat, sans-serif" font-weight="900" font-size="160" fill="#0C2A72" letter-spacing="-2">GO</text>
+    <text x="0" y="0" class="heavy" font-size="150" fill="#0C2A72" letter-spacing="-4">GO</text>
     <!-- MEDIA -->
-    <text x="0" y="160" font-family="Epilogue, Montserrat, sans-serif" font-weight="900" font-size="160" fill="#0C2A72" letter-spacing="-2">MEDIA</text>
+    <text x="0" y="145" class="heavy" font-size="150" fill="#0C2A72" letter-spacing="-4">MEDIA</text>
     <!-- Subtext -->
-    <text x="0" y="220" font-family="Epilogue, Montserrat, sans-serif" font-weight="600" font-size="44" fill="#0C2A72" letter-spacing="1">Digital Marketing &amp; Ecommerce</text>
+    <text x="0" y="210" class="subtext" font-size="42" fill="#0C2A72" letter-spacing="1">Digital Marketing &amp; Ecommerce</text>
   </g>
 </svg>
