@@ -56,40 +56,7 @@
             overflow-x: hidden;
         }
 
-        /* Mobile Menu Overlay (Fixed to wrapper) */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: var(--phone-width);
-            height: 100%;
-            background: rgba(2, 3, 30, 0.4);
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-        
-        .menu-drawer {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 85%;
-            height: 100%;
-            background: #02031e;
-            background-image: radial-gradient(circle at 0% 0%, rgba(96, 37, 225, 0.15) 0%, transparent 50%);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            padding: 80px 40px;
-            transform: translateX(100%);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid rgba(255,255,255,0.08);
-        }
-        .mobile-menu-overlay.active .menu-drawer { transform: translateX(0); }
+
 
 
         /* LANDING PAGE STYLES - REPLICATED FROM GO-MEDIA-LANDING.HTML */
@@ -145,7 +112,7 @@
         /* Mobile Menu Overlay & Drawer (Premium Refined) */
         .mobile-menu-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 3, 30, 0.4);
+            background: rgba(2, 3, 30, 0.6);
             z-index: 2000;
             opacity: 0; visibility: hidden;
             transition: all 0.4s ease;
@@ -154,53 +121,59 @@
         .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
         
         .menu-drawer {
-            position: absolute; top: 0; right: 0; width: 75%; height: 100%;
+            position: absolute; top: 0; right: 0; width: 85%; height: 100%;
             background: #02031e;
-            background-image: radial-gradient(circle at 0% 0%, rgba(96, 37, 225, 0.15) 0%, transparent 50%);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            padding: 100px 40px;
+            background-image: radial-gradient(circle at 0% 0%, rgba(96, 37, 225, 0.2) 0%, transparent 50%);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            padding: 80px 32px;
             transform: translateX(100%);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex; flex-direction: column;
-            border-left: 1px solid rgba(255,255,255,0.08);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
         .mobile-menu-overlay.active .menu-drawer { transform: translateX(0); }
         
         .menu-close {
-            position: absolute; top: 50px; left: 40px;
+            position: absolute; top: 30px; right: 30px;
             width: 44px; height: 44px; border-radius: 50%;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 20px; cursor: pointer;
+            color: #fff; font-size: 24px; cursor: pointer;
             border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
         }
+        .menu-close:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
         
         .menu-links {
-            display: flex; flex-direction: column; gap: 32px; margin-top: 20px;
+            display: flex; flex-direction: column; gap: 28px; margin-top: 60px;
         }
         .menu-links a {
-            color: #fff; font-size: 20px; font-weight: 700;
+            color: #fff; font-size: 22px; font-weight: 800;
             text-decoration: none; text-transform: uppercase;
             letter-spacing: 1px; transition: all 0.3s ease;
-            display: flex; align-items: baseline; gap: 15px;
+            display: flex; align-items: center; gap: 18px;
+            width: 100%;
         }
         .menu-links a span { 
-            color: var(--color-cyan-light); font-size: 10px; 
+            color: var(--color-cyan-light); font-size: 12px; 
             font-weight: 800; letter-spacing: 2px;
-            opacity: 0.6;
+            opacity: 0.8;
+            width: 25px;
         }
-        .menu-links a:hover { color: var(--color-cyan-light); transform: translateX(8px); }
+        .menu-links a:hover { color: var(--color-cyan-light); transform: translateX(10px); }
 
         .menu-footer {
-            margin-top: auto; padding-top: 30px;
+            margin-top: auto; padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
         .menu-tagline {
-            font-size: 10px; color: rgba(255,255,255,0.3);
+            font-size: 11px; color: rgba(255,255,255,0.4);
             text-transform: uppercase; letter-spacing: 2px;
             margin-bottom: 20px; font-weight: 700;
         }
-        .menu-social { display: flex; gap: 24px; font-size: 18px; color: rgba(255,255,255,0.6); }
-        .menu-social i:hover { color: #fff; }
+        .menu-social { display: flex; gap: 20px; font-size: 20px; color: rgba(255,255,255,0.6); }
+        .menu-social i:hover { color: #fff; transform: translateY(-3px); transition: all 0.3s; }
 
         .hamburger { color: var(--color-navy); font-size: 24px; flex-shrink: 0; cursor: pointer; }
         
