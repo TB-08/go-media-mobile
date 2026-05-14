@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Media - AI & Automation Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Epilogue:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-cyan:        #6025E1;
+            --color-cyan-light:  #9461f7;
+            --color-cyan-dark:   #4a1ab2;
+            --color-accent:      #ff5e00;
+            --color-navy:        #0C2A72;
+            --color-navy-deep:   #02031e;
+            --color-bg:          #ffffff;
+            --color-surface:     #f8fafc;
+            --color-border:      rgba(226, 232, 240, 0.6);
+            --color-text:        #0f172a;
+            --color-muted:       #475569;
+            --font: 'Montserrat', sans-serif;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 20px 40px -10px rgba(12, 42, 114, 0.1);
+            --grad-main: linear-gradient(135deg, #0C2A72 0%, #6025E1 100%);
+            --grad-purple: linear-gradient(135deg, #6025E1 0%, #9461f7 100%);
+            
+            /* iPhone 12 Pro Max Mockup Dimensions */
+            --phone-width: 428px;
+            --phone-height: 926px;
+            --phone-radius: 54px;
+            --phone-bezel: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font);
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: var(--color-text);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* App Wrapper to maintain mobile dimensions on desktop */
+        .app-wrapper {
+            width: 100%;
+            max-width: var(--phone-width);
+            min-height: 100vh;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+        }
+
+        /* Mobile Menu Overlay (Fixed to wrapper) */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: var(--phone-width);
+            height: 100%;
+            background: rgba(2, 3, 30, 0.4);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        
+        .menu-drawer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 85%;
+            height: 100%;
+            background: #02031e;
+            background-image: radial-gradient(circle at 0% 0%, rgba(96, 37, 225, 0.15) 0%, transparent 50%);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            padding: 80px 40px;
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-menu-overlay.active .menu-drawer { transform: translateX(0); }
+
+
+        /* LANDING PAGE STYLES - REPLICATED FROM GO-MEDIA-LANDING.HTML */
+        .landing-page {
+            --lp-padding: 24px;
+            color: var(--color-text);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            height: 32px;
+            background: var(--color-navy);
+            color: var(--color-cyan-light);
+            font-size: 11px; font-weight: 600;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; white-space: nowrap;
+        }
+        .top-bar-track {
+            display: flex; gap: 40px;
+            animation: marquee-top 20s linear infinite;
+        }
+        @keyframes marquee-top {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Header */
+        header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 0 var(--lp-padding); height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(12, 42, 114, 0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+        .logo { display: flex; align-items: center; height: 38px; flex-shrink: 0; }
+        .logo img { height: 100%; width: auto; object-fit: contain; }
+        
+        .nav-links {
+            display: flex; gap: 15px; margin: 0 10px;
+        }
+        .nav-links a {
+            text-decoration: none; color: var(--color-navy);
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; opacity: 0.8;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--color-cyan); }
+
+        /* Mobile Menu Overlay & Drawer (Premium Refined) */
+        .mobile-menu-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 3, 30, 0.4);
+            z-index: 2000;
+            opacity: 0; visibility: hidden;
+            transition: all 0.4s ease;
+            border-radius: inherit;
+        }
+        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
+        
+        .menu-drawer {
+            position: absolute; top: 0; right: 0; width: 75%; height: 100%;
+            background: #02031e;
+            background-image: radial-gradient(circle at 0% 0%, rgba(96, 37, 225, 0.15) 0%, transparent 50%);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            padding: 100px 40px;
+            transform: translateX(100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-menu-overlay.active .menu-drawer { transform: translateX(0); }
+        
+        .menu-close {
+            position: absolute; top: 50px; left: 40px;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 20px; cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .menu-links {
+            display: flex; flex-direction: column; gap: 32px; margin-top: 20px;
+        }
+        .menu-links a {
+            color: #fff; font-size: 20px; font-weight: 700;
+            text-decoration: none; text-transform: uppercase;
+            letter-spacing: 1px; transition: all 0.3s ease;
+            display: flex; align-items: baseline; gap: 15px;
+        }
+        .menu-links a span { 
+            color: var(--color-cyan-light); font-size: 10px; 
+            font-weight: 800; letter-spacing: 2px;
+            opacity: 0.6;
+        }
+        .menu-links a:hover { color: var(--color-cyan-light); transform: translateX(8px); }
+
+        .menu-footer {
+            margin-top: auto; padding-top: 30px;
+        }
+        .menu-tagline {
+            font-size: 10px; color: rgba(255,255,255,0.3);
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 20px; font-weight: 700;
+        }
+        .menu-social { display: flex; gap: 24px; font-size: 18px; color: rgba(255,255,255,0.6); }
+        .menu-social i:hover { color: #fff; }
+
+        .hamburger { color: var(--color-navy); font-size: 24px; flex-shrink: 0; cursor: pointer; }
+        
+        /* Hide nav links on very small mobile screens */
+        @media (max-width: 380px) {
+            .nav-links { display: none; }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 30px var(--lp-padding) 60px;
+            background: #fff; position: relative; overflow: hidden;
+            text-align: left;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(96,37,225,0.08) 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, rgba(96,37,225,0.07), rgba(148,97,247,0.04));
+            border: 1px solid rgba(96,37,225,0.18);
+            border-radius: 99px; padding: 8px 18px;
+            margin-bottom: 28px;
+        }
+        .pulse-dot {
+            width: 7px; height: 7px; background: var(--color-cyan); border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(96,37,225,0.2); animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
+        .badge-text { font-size: 11px; font-weight: 700; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        .hero h1 {
+            font-size: 30px; font-weight: 800; line-height: 1.4;
+            color: var(--color-navy); margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6025E1, #9461f7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        
+        .hero-rule {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--color-cyan), transparent);
+            margin-bottom: 24px; border-radius: 2px;
+        }
+
+        .hero-actions {
+            display: flex; gap: 12px; margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 16px 24px; border-radius: 14px; font-weight: 800; font-size: 14px;
+            text-align: center; transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; justify-content: center;
+            flex: 1; min-width: 160px;
+        }
+        .btn-primary {
+            background: var(--grad-main); color: #fff;
+            box-shadow: 0 10px 20px rgba(12,42,114,0.2);
+            text-transform: uppercase;
+        }
+        .btn-outline {
+            background: #fff; border: 1px solid rgba(12, 42, 114, 0.1); color: var(--color-navy);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .hero-social-proof {
+            display: flex; align-items: center; gap: 12px;
+            margin-top: 24px;
+        }
+        .proof-avatars { display: flex; }
+        .proof-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 2px solid #fff; margin-left: -10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 800; color: #fff;
+        }
+        .proof-avatar:first-child { margin-left: 0; }
+        .proof-avatar:nth-child(1) { background: #6025E1; }
+        .proof-avatar:nth-child(2) { background: #0C2A72; }
+        .proof-avatar:nth-child(3) { background: #ff5e00; }
+        .proof-avatar:nth-child(4) { background: #02031e; }
+        .proof-text { font-size: 13px; color: var(--color-muted); font-weight: 500; }
+        .proof-text strong { color: var(--color-navy); }
+
+        /* Hero Visual SVG Nodes (More Complex like Desktop) */
+        .hero-visual {
+            position: relative; height: 320px; margin-top: 20px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .hero-visual svg { width: 110%; height: auto; filter: drop-shadow(0 20px 40px rgba(96,37,225,0.1)); }
+        @keyframes node-pulse { 0%, 100% { r: 6; opacity: 0.4; } 50% { r: 9; opacity: 1; } }
+        @keyframes dash-flow { to { stroke-dashoffset: -200; } }
+        .node { animation: node-pulse 2s infinite; fill: var(--color-cyan); }
+        .node.n2 { animation-delay: 0.2s; }
+        .node.n3 { animation-delay: 0.4s; }
+        .node.n4 { animation-delay: 0.6s; }
+        .node.n5 { animation-delay: 0.8s; }
+        .node.n6 { animation-delay: 1.0s; }
+        .node.n7 { animation-delay: 1.2s; }
+        .flow-line { stroke: var(--color-cyan); stroke-dasharray: 8 4; animation: dash-flow 4s linear infinite; stroke-opacity: 0.2; stroke-width: 1.5; }
+        .flow-line.fl2 { animation-delay: 0.5s; }
+        .flow-line.fl3 { animation-delay: 1.0s; }
+        .flow-line.fl4 { animation-delay: 1.5s; }
+
+        /* Pain Points (3D Journey) */
+        .pain-section {
+            background: radial-gradient(circle at top right, #0C2A72, #02031e);
+            padding: 80px var(--lp-padding);
+            color: #fff; position: relative; overflow: hidden;
+        }
+        .pain-journey-svg {
+            position: absolute; left: 35px; top: 0; bottom: 0;
+            width: 2px; background: rgba(255,255,255,0.05);
+            z-index: 0;
+        }
+        .pain-energy-dot {
+            position: absolute; left: 34px; top: 0;
+            width: 4px; height: 120px;
+            background: linear-gradient(to bottom, transparent, #6025E1, transparent);
+            box-shadow: 0 0 20px #6025E1;
+            animation: flow-down 5s linear infinite;
+            z-index: 1;
+        }
+        @keyframes flow-down { from { top: -120px; } to { top: 100%; } }
+
+        .section-tag {
+            font-size: 11px; font-weight: 700; color: var(--color-cyan-light);
+            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; display: block;
+            position: relative; z-index: 2;
+        }
+        .section-h2 { 
+            font-size: 32px; font-weight: 900; line-height: 1.2; margin-bottom: 60px;
+            letter-spacing: -0.03em; position: relative; z-index: 2;
+            background: linear-gradient(135deg, #FFFFFF 30%, #9461f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pain-node-item {
+            position: relative; padding-left: 75px; margin-bottom: 64px;
+            z-index: 2;
+        }
+        .pain-node-circle {
+            position: absolute; left: 0; top: 0;
+            width: 44px; height: 44px;
+            background: rgba(2, 3, 30, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%; backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .pain-node-circle::before {
+            content: ''; position: absolute; inset: -1px; border-radius: 50%;
+            padding: 1px; background: linear-gradient(135deg, #6025E1, #9461f7);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; opacity: 0.6;
+        }
+        .pain-node-item h3 { font-size: 19px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+        .pain-node-item p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; font-weight: 400; }
+
+        /* Solutions (Redesigned) */
+        .solution-section {
+            background: #fff; padding: 80px var(--lp-padding); position: relative; overflow: hidden;
+        }
+        .solution-deco-text {
+            position: absolute; top: 0; right: 8px; height: auto;
+            font-size: 85px; font-weight: 900; color: rgba(12, 42, 114, 0.04);
+            pointer-events: none; text-transform: uppercase;
+            writing-mode: vertical-rl;
+            font-family: var(--font);
+            display: flex; gap: 50px;
+            animation: marquee-vertical 25s linear infinite;
+            z-index: 1;
+            white-space: nowrap;
+        }
+        @keyframes marquee-vertical { 
+            from { transform: translateY(0); } 
+            to { transform: translateY(-50%); } 
+        }
+
+        .solution-section .section-h2 {
+            color: var(--color-navy) !important;
+            background: none !important;
+            -webkit-text-fill-color: var(--color-navy) !important;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            text-align: left;
+            font-size: 30px;
+        }
+
+        .benefit-rows { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
+        .benefit-row {
+            background: var(--color-surface);
+            padding: 24px; border-radius: 20px; border: 1px solid var(--color-border);
+            display: flex; flex-direction: column; gap: 16px;
+            background: #fff;
+            padding: 32px; border-radius: 24px;
+            border: 1px solid rgba(12, 42, 114, 0.05);
+            box-shadow: 0 10px 30px rgba(12, 42, 114, 0.04);
+            transition: transform 0.3s ease;
+        }
+        .benefit-num {
+            width: 40px; height: 40px; background: var(--color-navy);
+            color: #fff; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 14px; margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(2, 3, 30, 0.15);
+        }
+        .benefit-row h3 { font-size: 20px; font-weight: 800; color: var(--color-navy); margin-bottom: 12px; }
+        .benefit-row p { font-size: 15px; color: var(--color-muted); line-height: 1.6; }
+
+        /* Expansion (Section B Style) */
+        .expansion-section {
+            background: linear-gradient(135deg, #0a1628, #0C2A72);
+            padding: 80px var(--lp-padding); color: #fff; position: relative; overflow: hidden;
+        }
+        .expansion-section::after {
+            content: ''; position: absolute; top: 0; left: -200%; width: 200%; height: 100%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg); animation: light-sweep 6s infinite;
+        }
+        @keyframes light-sweep { from { left: -200%; } to { left: 200%; } }
+
+        .expansion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
+        .exp-card {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 16px; text-align: center;
+        }
+        .exp-card i { font-size: 20px; color: var(--color-cyan-light); margin-bottom: 12px; display: block; }
+        .exp-card h4 { font-size: 13px; font-weight: 700; color: #fff; }
+
+        /* Trust Section (Polished) */
+        .trust-section { 
+            background: #fff; padding: 80px var(--lp-padding) 30px; text-align: center; 
+            position: relative; overflow: hidden;
+        }
+        .trust-section::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: 
+                linear-gradient(rgba(12, 42, 114, 0.03) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(12, 42, 114, 0.03) 1.5px, transparent 1.5px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        .trust-section .section-h2 {
+            color: var(--color-navy) !important;
+            background: none !important;
+            -webkit-text-fill-color: var(--color-navy) !important;
+            margin-bottom: 40px; font-size: 28px;
+        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .stat-block {
+            background: #fff; border: 1px solid rgba(12,42,114,0.06);
+            padding: 30px 20px; border-radius: 24px; text-align: center;
+            box-shadow: 0 15px 35px rgba(12,42,114,0.03);
+            transition: transform 0.3s ease;
+        }
+        .stat-number { 
+            font-size: 36px; font-weight: 900; color: var(--color-navy);
+            margin-bottom: 8px; display: block; 
+            letter-spacing: -0.02em;
+        }
+        .stat-bar-wrap { width: 40px; height: 3px; background: rgba(96,37,225,0.1); border-radius: 2px; margin: 0 auto 15px; overflow: hidden; }
+        .stat-bar { height: 100%; width: 100%; background: var(--grad-purple); border-radius: 2px; }
+        .stat-label { font-size: 11px; font-weight: 700; color: var(--color-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+        .trust-sub-h3 {
+            font-size: 14px; font-weight: 700; color: var(--color-navy);
+            text-transform: uppercase; letter-spacing: 2px; opacity: 0.7;
+            margin-top: 40px; margin-bottom: 25px;
+        }
+
+        /* Cinematic Marquee */
+        .marquee-container {
+            overflow: hidden; position: relative;
+            mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+        }
+        .marquee-track {
+            display: flex; gap: 50px; animation: marquee-logos 25s linear infinite; width: max-content;
+            align-items: center;
+        }
+        @keyframes marquee-logos { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .partner-logo { font-size: 40px; color: var(--color-navy); opacity: 0.15; transition: opacity 0.3s; }
+        .partner-logo:hover { opacity: 0.5; }
+
+        /* CTA Form (Premium) */
+        .cta-section {
+            background: #fff; padding: 40px var(--lp-padding) 100px; position: relative;
+        }
+        .form-card {
+            background: #fff; border-radius: 32px; padding: 48px 24px;
+            box-shadow: 0 40px 100px rgba(12, 42, 114, 0.12);
+            border: 1px solid rgba(12, 42, 114, 0.05);
+            position: relative; overflow: hidden;
+            text-align: center;
+        }
+        .form-card::after {
+            content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(96, 37, 225, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .urgency-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, rgba(255, 94, 0, 0.1), rgba(255, 94, 0, 0.05));
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 99px; padding: 8px 18px;
+            font-size: 11px; color: #f97316; font-weight: 800; margin-bottom: 28px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .urgency-pill i { animation: pulse-icon 1.5s infinite; }
+        @keyframes pulse-icon { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
+
+        .form-title { 
+            font-size: 26px; font-weight: 900; color: var(--color-navy); 
+            margin-bottom: 40px; line-height: 1.2; letter-spacing: -0.02em;
+            text-align: center;
+        }
+        .form-group { margin-bottom: 24px; position: relative; text-align: left; }
+        .form-group label { 
+            display: block; font-size: 10px; font-weight: 800; color: var(--color-navy); 
+            margin-bottom: 10px; opacity: 0.5; text-transform: uppercase; letter-spacing: 1.5px;
+        }
+        .input-wrapper { position: relative; }
+        .input-wrapper i {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            color: var(--color-navy); opacity: 0.3; font-size: 14px;
+        }
+        .form-group input, .form-group select {
+            width: 100%; padding: 16px 16px 16px 44px; border-radius: 16px; 
+            border: 1px solid rgba(12, 42, 114, 0.1);
+            background: #fcfdfe; font-size: 15px; font-family: var(--font); outline: none;
+            transition: all 0.3s ease; color: var(--color-navy);
+        }
+        .form-group input::placeholder { color: rgba(15, 23, 42, 0.3); }
+        .form-group input:focus { 
+            border-color: var(--color-cyan); background: #fff; 
+            box-shadow: 0 0 0 4px rgba(96, 37, 225, 0.1);
+        }
+        .btn-submit {
+            width: 100%; padding: 20px; border-radius: 18px; border: none;
+            background: var(--grad-main); color: #fff; font-weight: 800; font-size: 16px;
+            box-shadow: 0 20px 40px rgba(12, 42, 114, 0.25); 
+            margin-top: 16px; text-transform: uppercase; letter-spacing: 1px;
+            cursor: pointer; transition: transform 0.3s ease;
+        }
+        .btn-submit:active { transform: scale(0.98); }
+
+        /* 3D Floating Shapes (Decorations) */
+        .shape { position: absolute; z-index: -1; opacity: 0.1; }
+        .cube { width: 40px; height: 40px; border: 2px solid var(--color-cyan); transform: rotate(45deg); top: 10%; right: 5%; animation: float 6s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(45deg); } 50% { transform: translateY(-20px) rotate(60deg); } }
+
+        /* Footer (Perfectly Balanced & Compact) */
+        footer {
+            background: linear-gradient(to bottom, #0c1b3d, #060e21);
+            padding: 30px var(--lp-padding);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+        .footer-brand { margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+        .footer-logo-img { width: 140px; margin-bottom: 15px; }
+        .footer-company { 
+            font-size: 11px; font-weight: 600; color: #fff; line-height: 1.6;
+            text-transform: uppercase; margin-bottom: 25px; max-width: 280px;
+            opacity: 0.7;
+        }
+        .footer-socials { display: flex; gap: 12px; justify-content: center; margin-bottom: 15px; }
+        .footer-social-link {
+            width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 16px; transition: all 0.4s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-social-link:hover { background: var(--grad-main); transform: translateY(-3px); border-color: transparent; }
+
+        .footer-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px 15px; 
+            margin: 35px 0; text-align: left;
+        }
+        .footer-col.align-right { text-align: right; }
+        .footer-col.full-width { grid-column: span 2; text-align: center; }
+        .footer-col-title {
+            color: #fff; font-size: 13px; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;
+            position: relative; display: inline-block;
+        }
+        .footer-col-title::after {
+            content: ''; position: absolute; bottom: -6px; left: 0; width: 25px; height: 2px;
+            background: var(--grad-main); border-radius: 2px;
+        }
+        .footer-col.align-right .footer-col-title::after { left: auto; right: 0; }
+        .footer-col.full-width .footer-col-title::after { left: 50%; transform: translateX(-50%); }
+
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { 
+            color: rgba(255,255,255,0.5); text-decoration: none; font-size: 12px; 
+            transition: color 0.3s; font-weight: 500;
+        }
+        .footer-links a:hover { color: #fff; }
+
+        .footer-contact-wrap { 
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
+            margin-top: 15px; width: 100%;
+        }
+        .footer-contact-item { 
+            display: flex; flex-direction: row; align-items: center; gap: 10px; 
+            justify-content: center; width: 100%;
+        }
+        .footer-contact-item i { color: var(--color-cyan); font-size: 14px; opacity: 0.8; }
+        .footer-contact-text { 
+            font-size: 12px; line-height: 1.4; color: rgba(255,255,255,0.5); 
+            font-weight: 500; white-space: nowrap;
+        }
+
+        .footer-bottom {
+            padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center; font-size: 10px; color: rgba(255,255,255,0.3);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+            <div class="menu-drawer">
+                <div class="menu-close" id="closeMenu">&times;</div>
+                <div class="menu-links">
+                    <a href="#"><span>01</span> Trang chủ</a>
+                    <a href="#"><span>02</span> Vấn đề</a>
+                    <a href="#"><span>03</span> Giải pháp</a>
+                    <a href="#"><span>04</span> Quy trình</a>
+                    <a href="#"><span>05</span> Tin tưởng</a>
+                    <a href="#"><span>06</span> Đăng ký</a>
+                </div>
+                <div class="menu-footer">
+                    <div class="menu-tagline">Go Media AI Agency</div>
+                    <div class="menu-social">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-linkedin-in"></i>
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-content">
+
+                    <div class="landing-page">
+                        
+                        <!-- Top Bar -->
+                        <div class="top-bar">
+                            <div class="top-bar-track">
+                                <span>🚀 HỆ THỐNG MARKETING AUTOMATION MAY ĐO</span>
+                                <span>🔥 GIẢI PHÁP AI CHO DOANH NGHIỆP</span>
+                                <span>🚀 HỆ THỐNG MARKETING AUTOMATION MAY ĐO</span>
+                            </div>
+                        </div>
+
+                        <!-- Header -->
+                        <header>
+                            <div class="logo">
+                                <img src="Logo.png" alt="Go Media Logo">
+                            </div>
+                            <nav class="nav-links">
+                                <a href="#">Trang chủ</a>
+                                <a href="#">Giải pháp</a>
+                                <a href="#">Báo giá</a>
+                            </nav>
+                            <div class="hamburger" id="openMenu"><i class="fas fa-bars"></i></div>
+                        </header>
+
+                        <!-- Hero -->
+                        <section class="hero">
+                            <div class="cube shape"></div>
+                            <div class="hero-badge">
+                                <div class="pulse-dot"></div>
+                                <span class="badge-text">AI & AUTOMATION SOLUTIONS</span>
+                            </div>
+                            <h1>
+                                GIẢI PHÁP <br>
+                                <span class="gradient-text">AI & AUTOMATION</span> <br>
+                                “MAY ĐO” CHO MARKETING <br>
+                                TRUYỀN THÔNG
+                            </h1>
+                            <div class="hero-rule"></div>
+                            <p style="font-size: 17px; color: var(--color-muted); line-height: 1.7; margin-bottom: 32px; font-weight: 400;">
+                                Tăng tốc hệ thống marketing & truyền thông <strong>x3–5 lần</strong> với giải pháp thiết kế riêng cho từng doanh nghiệp.
+                            </p>
+
+                            <div class="hero-actions">
+                                <a href="#" class="btn btn-primary">TƯ VẤN MIỄN PHÍ</a>
+                                <a href="#" class="btn btn-outline">Khám phá giải pháp</a>
+                            </div>
+
+                            <div class="hero-social-proof">
+                                <div class="proof-avatars">
+                                    <div class="proof-avatar">G</div>
+                                    <div class="proof-avatar">T</div>
+                                    <div class="proof-avatar">M</div>
+                                    <div class="proof-avatar">+</div>
+                                </div>
+                                <div class="proof-text"><strong>100+ doanh nghiệp</strong> đã tin dùng Go Media</div>
+                            </div>
+                            
+                            <div class="hero-visual">
+                                <svg width="300" height="250" viewBox="0 0 400 350" fill="none">
+                                    <circle class="node" cx="200" cy="175" r="9"/>
+                                    <circle class="node n2" cx="100" cy="100" r="6"/>
+                                    <circle class="node n3" cx="300" cy="100" r="6"/>
+                                    <circle class="node n4" cx="100" cy="250" r="6"/>
+                                    <circle class="node n5" cx="300" cy="250" r="6"/>
+                                    <circle class="node n6" cx="200" cy="50" r="5"/>
+                                    <circle class="node n7" cx="200" cy="300" r="5"/>
+                                    
+                                    <path class="flow-line fl1" d="M200 175 L100 100"/>
+                                    <path class="flow-line fl2" d="M200 175 L300 100"/>
+                                    <path class="flow-line fl3" d="M200 175 L100 250"/>
+                                    <path class="flow-line fl4" d="M200 175 L300 250"/>
+                                    <path class="flow-line fl5" d="M200 50 L100 100"/>
+                                    <path class="flow-line fl6" d="M200 50 L300 100"/>
+                                    <path class="flow-line fl7" d="M200 300 L100 250"/>
+                                    <path class="flow-line fl8" d="M200 300 L300 250"/>
+                                </svg>
+                            </div>
+                        </section>
+
+                        <!-- Pain Points (3D Path) -->
+                        <section class="pain-section">
+                            <div class="pain-journey-svg"></div>
+                            <div class="pain-energy-dot"></div>
+                            
+                            <span class="section-tag">INSIGHTS</span>
+                            <h2 class="section-h2">Khó khăn của Doanh nghiệp Healthcare & Hospitality?</h2>
+                            
+                            <div class="pain-node-item">
+                                <div class="pain-node-circle"><i class="fas fa-bullseye"></i></div>
+                                <h3>Marketing thiếu khách hàng</h3>
+                                <p>Nguồn khách hàng không ổn định dẫn đến doanh thu bấp bênh.</p>
+                            </div>
+
+                            <div class="pain-node-item">
+                                <div class="pain-node-circle"><i class="fas fa-random"></i></div>
+                                <h3>Truyền thông rời rạc</h3>
+                                <p>Thiếu chiến lược thống nhất trên các kênh mạng xã hội.</p>
+                            </div>
+
+                            <div class="pain-node-item">
+                                <div class="pain-node-circle"><i class="fas fa-hourglass-half"></i></div>
+                                <h3>Vận hành thủ công</h3>
+                                <p>Tốn quá nhiều thời gian cho các đầu việc lặp đi lặp lại.</p>
+                            </div>
+
+                            <div class="pain-node-item">
+                                <div class="pain-node-circle"><i class="fas fa-comment-dots"></i></div>
+                                <h3>Thiếu nuôi dưỡng</h3>
+                                <p>Lãng phí lượng Lead tiềm năng khi không có quy trình chăm sóc tự động và cá nhân hóa trải nghiệm.</p>
+                            </div>
+
+                            <div class="pain-node-item">
+                                <div class="pain-node-circle"><i class="fas fa-brain"></i></div>
+                                <h3>Chưa ứng dụng AI</h3>
+                                <p>Dần tụt hậu so với đối thủ cạnh tranh khi chưa biết cách tận dụng AI để đột phá doanh thu.</p>
+                            </div>
+                        </section>
+
+                        <!-- Solutions -->
+                        <section class="solution-section">
+                            <div class="solution-deco-text">
+                                AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION &nbsp;&nbsp; AI AUTOMATION
+                            </div>
+                            <span class="section-tag" style="color: var(--color-cyan)">GIẢI PHÁP CORE</span>
+                            <h2 class="section-h2" style="color: var(--color-navy)">Xây Dựng Hệ Thống Marketing Tự Động Hóa Bằng AI!</h2>
+                            
+                            <div class="benefit-rows">
+                                <div class="benefit-row">
+                                    <div class="benefit-num">01</div>
+                                    <h3>Phễu khách hàng tự động</h3>
+                                    <p>Tự động hóa quy trình từ lúc khách hàng biết đến cho tới khi chuyển đổi.</p>
+                                </div>
+                                <div class="benefit-row">
+                                    <div class="benefit-num">02</div>
+                                    <h3>Kênh truyền thông đồng bộ</h3>
+                                    <p>Đảm bảo thông điệp thương hiệu nhất quán trên mọi nền tảng.</p>
+                                </div>
+                                <div class="benefit-row">
+                                    <div class="benefit-num">03</div>
+                                    <h3>Triển khai nhanh x3-5 lần</h3>
+                                    <p>Ứng dụng AI giúp rút ngắn thời gian sản xuất nội dung và kỹ thuật.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Expansion -->
+                        <section class="expansion-section">
+                            <span class="section-tag">MỞ RỘNG HỆ THỐNG</span>
+                            <h2 class="section-h2">Giải pháp “May đo” tư vấn đa nền tảng</h2>
+                            
+                            <div class="expansion-grid">
+                                <div class="exp-card">
+                                    <i class="fas fa-users-cog"></i>
+                                    <h4>Sales & CRM</h4>
+                                </div>
+                                <div class="exp-card">
+                                    <i class="fas fa-headset"></i>
+                                    <h4>Chăm sóc KH</h4>
+                                </div>
+                                <div class="exp-card">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <h4>Vận hành nội bộ</h4>
+                                </div>
+                                <div class="exp-card">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <h4>Đào tạo</h4>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Trust -->
+                        <section class="trust-section">
+                            <h2 class="section-h2" style="color: var(--color-navy); text-align: center;">Được Tin Tưởng Bởi Hàng Trăm Doanh Nghiệp</h2>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-block">
+                                    <span class="stat-number" data-count="700">0+</span>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" style="width: 100%"></div></div>
+                                    <span class="stat-label">Dự án đa ngành</span>
+                                </div>
+                                <div class="stat-block">
+                                    <span class="stat-number" data-count="500">0+</span>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" style="width: 100%"></div></div>
+                                    <span class="stat-label">Chiến dịch triển khai</span>
+                                </div>
+                                <div class="stat-block">
+                                    <span class="stat-number" data-count="120">0+</span>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" style="width: 100%"></div></div>
+                                    <span class="stat-label">Doanh nghiệp đối tác</span>
+                                </div>
+                                <div class="stat-block">
+                                    <span class="stat-number" data-count="50">0+</span>
+                                    <div class="stat-bar-wrap"><div class="stat-bar" style="width: 100%"></div></div>
+                                    <span class="stat-label">Đối tác chiến lược</span>
+                                </div>
+                            </div>
+                            
+                            <h3 class="trust-sub-h3">Đối Tác Chiến Lược</h3>
+
+                            <div class="marquee-container">
+                                <div class="marquee-track">
+                                    <i class="fab fa-facebook partner-logo"></i>
+                                    <i class="fab fa-google partner-logo"></i>
+                                    <i class="fab fa-tiktok partner-logo"></i>
+                                    <i class="fab fa-shopify partner-logo"></i>
+                                    <i class="fab fa-amazon partner-logo"></i>
+                                    <!-- Double for loop -->
+                                    <i class="fab fa-facebook partner-logo"></i>
+                                    <i class="fab fa-google partner-logo"></i>
+                                    <i class="fab fa-tiktok partner-logo"></i>
+                                    <i class="fab fa-shopify partner-logo"></i>
+                                    <i class="fab fa-amazon partner-logo"></i>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Form -->
+                        <section class="cta-section">
+                            <div class="form-card">
+                                <div class="urgency-pill">
+                                    <i class="fas fa-fire"></i>
+                                    Chỉ còn 3 suất tư vấn miễn phí tuần này
+                                </div>
+                                
+                                <h2 class="form-title">ĐĂNG KÝ NHẬN TƯ VẤN MIỄN PHÍ</h2>
+                                
+                                <form>
+                                    <div class="form-group">
+                                        <label>Họ & Tên</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" placeholder="Nhập họ tên của bạn">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Số điện thoại</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="tel" placeholder="090 xxx xxxx">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-envelope"></i>
+                                            <input type="email" placeholder="example@gmail.com">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Tên doanh nghiệp</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-building"></i>
+                                            <input type="text" placeholder="Công ty của bạn">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Ngành nghề</label>
+                                        <div class="input-wrapper">
+                                            <i class="fas fa-briefcase"></i>
+                                            <select>
+                                                <option>Healthcare</option>
+                                                <option>Hospitality</option>
+                                                <option>E-commerce</option>
+                                                <option>Khác</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn-submit">ĐĂNG KÝ NGAY</button>
+                                </form>
+                            </div>
+                        </section>
+
+                        <footer>
+                            <div class="footer-brand">
+                                <img src="logo GO_upscayl_5x_upscayl-standard-4x.png" alt="Go Media" class="footer-logo-img">
+                                <div class="footer-company">
+                                    CÔNG TY TNHH TRUYỀN THÔNG VÀ CÔNG NGHỆ GO MEDIA - MST: 0402219056
+                                </div>
+                                <div class="footer-socials">
+                                    <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="footer-grid">
+                                <div class="footer-col">
+                                    <h4 class="footer-col-title">Liên kết nhanh</h4>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Về chúng tôi</a></li>
+                                        <li><a href="#">Tuyển dụng</a></li>
+                                        <li><a href="#">Hỗ trợ khách hàng</a></li>
+                                        <li><a href="#">Dự án tiêu biểu</a></li>
+                                        <li><a href="#">Blog và Tin tức</a></li>
+                                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="footer-col align-right">
+                                    <h4 class="footer-col-title">Dịch vụ</h4>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Thiết kế web</a></li>
+                                        <li><a href="#">Nhận diện TH</a></li>
+                                        <li><a href="#">Quản trị nội dung</a></li>
+                                        <li><a href="#">Landing page</a></li>
+                                        <li><a href="#">Dịch vụ SEO</a></li>
+                                        <li><a href="#">Marketing thuê ngoài</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="footer-col full-width">
+                                    <h4 class="footer-col-title">Thông tin liên hệ</h4>
+                                    <div class="footer-contact-wrap">
+                                        <div class="footer-contact-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div class="footer-contact-text">91 Thanh Thai, Khue Trung, Cam Le, Da Nang</div>
+                                        </div>
+                                        <div class="footer-contact-item">
+                                            <i class="fas fa-phone-alt"></i>
+                                            <div class="footer-contact-text">08 3333 68 51 - 039 8050 837</div>
+                                        </div>
+                                        <div class="footer-contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <div class="footer-contact-text">info@gonetwork.vn</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="footer-bottom">
+                                <p>Design by 2026 © Go Media - 2024</p>
+                            </div>
+                        </footer>
+
+                    </div>
+                </div>
+            </div>
+
+    <script>
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuLinks = document.querySelectorAll('.menu-links a');
+
+        openMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close menu when clicking the dim overlay
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Count Up Animation
+        const countElements = document.querySelectorAll('.stat-number');
+        const observerOptions = { threshold: 0.5 };
+
+        const countObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-count'));
+                    let current = 0;
+                    const duration = 2000; // 2 seconds
+                    const stepTime = Math.abs(Math.floor(duration / target));
+                    
+                    const timer = setInterval(() => {
+                        current += Math.ceil(target / 100);
+                        if (current >= target) {
+                            el.innerText = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            el.innerText = current + '+';
+                        }
+                    }, 30);
+                    
+                    observer.unobserve(el);
+                }
+            });
+        }, observerOptions);
+
+        countElements.forEach(el => countObserver.observe(el));
+    </script>
+</body>
+</html>
